@@ -45,12 +45,16 @@ router.get('/', (req, res) => {
 	];
 
 	res.json(posts);
+    console.log("Chiamata ricevuta!");
 })
 
 
 //Show (cRud)
 router.get('/:id', (req, res) => {
+    
+    console.log("Chiamata ricevuta!");
 	res.send(`You requested to SHOW the post with id: ${req.params.id}`);
+    
 })
 
 //Store (Crud)
@@ -60,12 +64,12 @@ router.post('/', (req, res) => {
 
 //Update (crUd)
 router.put('/:id', (req, res) => {
-	res.send(`You requested to UPDATE (complete) the post with id: ${req.params.id}`);
+	res.send(`You requested to UPDATE the post with id: ${req.params.id}`);
 })
 
 //Modify (crUd)
 router.patch('/:id', (req, res) => {
-	res.send(`You requested to MODIFY (partial) the post with id: ${req.params.id}`);
+	res.send(`You requested to MODIFY the post with id: ${req.params.id}`);
 })
 
 //Destroy (cruD)
