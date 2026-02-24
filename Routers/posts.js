@@ -9,34 +9,18 @@ router.get('/', postController.index )
 
 
 //Show (cRud)
-router.get('/:id', (req, res) => {
-    console.log("Chiamata GET ricevuta");
-	res.send(`You requested to SHOW the post with id: ${req.params.id}`);
-    
-})
+router.get('/:id',postController.show )
 
 //Store (Crud)
-router.post('/', (req, res) => {
-    console.log("Chiamata POST ricevuta");
-	res.send(`You request to CREATE a new post`);
-})
+router.post('/', postController.store)
 
 //Update (crUd)
-router.put('/:id', (req, res) => {
-    console.log("Chiamata PUT ricevuta");
-	res.send(`You requested to UPDATE the post with id: ${req.params.id}`);
-})
+router.put('/:id',postController.update )
 
 //Modify (crUd)
-router.patch('/:id', (req, res) => {
-    console.log("Chiamata PATCH ricevuta");
-	res.send(`You requested to MODIFY the post with id: ${req.params.id}`);
-})
+router.patch('/:id', postController.modify)
 
 //Destroy (cruD)
-router.delete('/:id', (req, res) => {
-    console.log("Chiamata DELETE ricevuta");
-	res.send(`You requested to DELETE the post with id: ${req.params.id}`);
-})
+router.delete('/:id', postController.destroy )
 
 module.exports = router;
