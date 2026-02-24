@@ -12,8 +12,22 @@ function index (req, res) {
 }
 
 function show (req, res) {
-    console.log("Chiamata GET ricevuta");
-	res.send(`You requested to SHOW the post with id: ${req.params.id}`);
+    //console.log("Chiamata GET ricevuta");
+	//res.send(`You requested to SHOW the post with id: ${req.params.id}`);
+
+    const id = Number(req.params.id);
+
+	if (isNaN(id)) {
+		return res.status(400).json({ error: "User error", message: "L'id non è valido" });
+	}
+
+	const result = posts.find(posts => posts.id == id);
+
+	if (!result) {
+		return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
+	}
+
+	return res.json(result);
     
 }
 
