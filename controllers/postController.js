@@ -47,8 +47,28 @@ function modify (req, res) {
 }
 
 function destroy (req, res) {
-    console.log("Chiamata DELETE ricevuta");
-	res.send(`You requested to DELETE the post with id: ${req.params.id}`);
+    //console.log("Chiamata DELETE ricevuta");
+	//res.send(`You requested to DELETE the post with id: ${req.params.id}`);
+
+    const id = Number(req.params.id);
+
+	if (isNaN(id)) {
+		return res.status(400).json({ error: "User error", message: "L'id non è valido" });
+	}
+
+	const result = posts.find(posts => posts.id == id);
+
+	if (!result) {
+		return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
+	}
+
+	posts.splice(posts.indexOf(result), 1);
+
+	console.log(`Post:${id} eliminato`, posts);
+
+	return res.sendStatus(204);
+
+
 }
 
 
