@@ -3,10 +3,17 @@ const posts = require ("../data/posts")
 
 function index (req, res) {
 
-	
+	let results = posts;
 
-	res.json(posts);
-    console.log("Chiamata GET file JSON ricevuta");
+	
+	if (req.query.tag) {
+		results = posts.filter(post => post.tags.includes(req.query.tag));
+	}
+
+	res.json(results);
+
+	//res.json(posts);
+    //console.log("Chiamata GET file JSON ricevuta");
     
     
 }
@@ -21,7 +28,7 @@ function show (req, res) {
 		return res.status(400).json({ error: "User error", message: "L'id non è valido" });
 	}
 
-	const result = posts.find(posts => posts.id == id);
+	const result = posts.find(post => post.id == id);
 
 	if (!result) {
 		return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
@@ -56,7 +63,7 @@ function destroy (req, res) {
 		return res.status(400).json({ error: "User error", message: "L'id non è valido" });
 	}
 
-	const result = posts.find(posts => posts.id == id);
+	const result = posts.find(post => post.id == id);
 
 	if (!result) {
 		return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
